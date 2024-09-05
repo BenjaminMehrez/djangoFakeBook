@@ -18,12 +18,9 @@ def home_view(request, tag=None):
         tag = get_object_or_404(Tag, slug=tag)
     else:
         posts = Post.objects.all()
-
-    categories = Tag.objects.all()
-
+        
     context = {
         'posts': posts,
-        'categories': categories,
         'tag': tag
     }
 
@@ -103,7 +100,7 @@ def post_page_view(request, pk):
     post = get_object_or_404(Post, id=pk)
     commentform = CommentCreateForm()
     replyform = ReplyCreateForm()
-
+    
     if request.htmx:
         if 'top' in request.GET:
             # comments = post.comments.filter(likes__isnull=False).distinct()
