@@ -49,7 +49,7 @@
         <ul class="hoverlist">
             {% for comment in top_comments %}
             <li>
-                <a href="{% url 'post' comment.parent_post.idJ %}" class="flex items-stretch justify-between">
+                <a href="{% url 'post' comment.parent_post.id %}" class="flex items-stretch justify-between">
                     <div class="flex items-center truncate">
                         {% if comment.author %}
                         <img class="w-6 h-6 rounded-full object-cover mr-1" src="{{ comment.author.profile.avatar }}">
