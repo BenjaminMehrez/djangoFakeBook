@@ -1,11 +1,17 @@
 {% load static %}
-<hero class="grid bg-gray-700 text-white text-center bg-cover z-10 relative bg-[url('{% static 'images/hero.jpg' %}')]">
-    <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
-    <div class="col-start-1 row-start-1 py-24 px-10 ">
-        <h1 class="font1 text-6xl title-fadein">Welcome to Photos & Captions</h1>
-        <p class="text-lg font-bold mb-5">Share your favorite Photos from Flickr and add a great caption</p>
-        {% if not user.is_authenticated %}
-        <a class="button" href="{% url 'account_signup' %}">Get Started</a>
-        {% endif %}
+<hero class="grid bg-gray-700 relative overflow-hidden text-white h-screen -mt-20 md:mt-0 lg:h-[500px] bg-cover bg-center xl:bg-[center_top_-20rem] z-10" style="background-image:url('{% static 'images/hero.jpg' %}')">
+    <div class="col-start-1 row-start-1 bg-gray-700 opacity-80 w-full h-full"></div>
+    <div class="col-start-1 row-start-1 py-12 grid md:block place-content-center -mt-20 md:mt-0 text-center md:pt-32 px-10 z-10">
+        <div class="herotext-anim max-w-[1170px] md:px-10 mx-auto" style="transform: translateY(0px); opacity: 1;">
+            <h1 class="font1 leading-none text-4xl md:text-6xl title-fadein font-thin">Welcome to Photos & Captions</h1>
+            <p class="text-md md:text-lg mb-5 leading-5 md:leading-none">Share your favorite Photos from Flickr and add a great caption</p>
+            {% if not user.is_authenticated %}
+            <a href="/accounts/signup/?next=/profile/onboarding/" class="inline-block cursor-pointer bg-gray-800 hover:bg-black text-white font-bold text-lg rounded-full py-5 px-6 transition-all">
+                Create Account
+            </a>
+            {% else %}
+            <div class="inline-block w-32 bg-emerald-300 p-0.5 mt-7"></div>
+            {% endif %}
+        </div>
     </div>
 </hero>
