@@ -119,7 +119,7 @@ DATABASES = {
     }
 }
 
-POSTGRES_LOCALLY = True
+POSTGRES_LOCALLY = False
 if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
@@ -163,17 +163,42 @@ STATICFILES_DIRS = [ BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
+# if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True: 
+#     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#     CLOUDINARY_STORAGE = {
+#         'CLOUD_NAME': env('CLOUD_NAME'),
+#         'API_KEY': env('CLOUD_API_KEY'),
+#         'API_SECRET': env('CLOUD_API_SECRET')
+#     }
+# else:
 
-if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True: 
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': env('CLOUD_NAME'),
-        'API_KEY': env('CLOUD_API_KEY'),
-        'API_SECRET': env('CLOUD_API_SECRET')
-    }
-else:
-    MEDIA_ROOT = BASE_DIR / 'media'
+import cloudinary
+import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
+
+# Configuration       
+cloudinary.config( 
+    cloud_name = "dve4pgfal", 
+    api_key = "459259441329455", 
+    api_secret = "4v0y_z8YCtibeHZQHEaYsp_J8qo", # Click 'View API Keys' above to copy your API secret
+    secure=True
+)
+
+# Upload an image
+upload_result = cloudinary.uploader.upload("https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg",
+                                           public_id="shoes")
+print(upload_result["secure_url"])
+
+# Optimize delivery by resizing and applying auto-format and auto-quality
+optimize_url, _ = cloudinary_url("shoes", fetch_format="auto", quality="auto")
+print(optimize_url)
+
+# Transform the image: auto-crop to square aspect_ratio
+auto_crop_url, _ = cloudinary_url("shoes", width=500, height=500, crop="auto", gravity="auto")
+print(auto_crop_url)
+    
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
