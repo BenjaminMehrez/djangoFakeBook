@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import cloudinary
 from environ import Env
 import dj_database_url
 
@@ -171,12 +170,11 @@ if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
 else:
     MEDIA_ROOT = BASE_DIR / 'media'
     
-cloudinary.config( 
-    cloud_name = "dehqan1xx", 
-    api_key = "894781184345973", 
-    api_secret = "vNkOOH2NO2cNLDS1Xnk3Pk_BIEo", # Click 'View API Keys' above to copy your API secret
-    secure=True
-)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('CLOUD_API_KEY'),
+    'API_SECRET': env('CLOUD_API_SECRET')
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
