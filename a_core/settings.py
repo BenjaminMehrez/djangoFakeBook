@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path
 from environ import Env
 import dj_database_url
@@ -119,7 +122,7 @@ DATABASES = {
     }
 }
 
-POSTGRES_LOCALLY = True
+POSTGRES_LOCALLY = False
 if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
@@ -162,17 +165,26 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
-if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True: 
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': env('CLOUD_NAME'),
-        'API_KEY': env('CLOUD_API_KEY'),
-        'API_SECRET': env('CLOUD_API_SECRET')
-    }
-else:
-    MEDIA_ROOT = BASE_DIR / 'media'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dehqan1xx',
+    'API_KEY': '894781184345973',
+    'API_SECRET': 'vNkOOH2NO2cNLDS1Xnk3Pk_BIEo',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+# if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True: 
+#     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#     CLOUDINARY_STORAGE = {
+#         'CLOUD_NAME': env('CLOUD_NAME'),
+#         'API_KEY': env('CLOUD_API_KEY'),
+#         'API_SECRET': env('CLOUD_API_SECRET')
+#     }
+# else:
+#     MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type
