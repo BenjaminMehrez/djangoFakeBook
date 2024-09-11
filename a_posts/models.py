@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 import uuid
 
 # Create your models here.
@@ -36,10 +37,9 @@ class LikedPost(models.Model):
         
 class Tag(models.Model):
     name = models.CharField(max_length=20)
-    image = models.FileField(upload_to='icons/', null=True, blank=True)
+    image = CloudinaryField(null=True, blank=True)
     slug = models.SlugField(max_length=20, unique=True)
     order = models.IntegerField(null=True)
-    
     
     def __str__(self):
         return self.name

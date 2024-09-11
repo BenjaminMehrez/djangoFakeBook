@@ -13,12 +13,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from environ import Env
 import dj_database_url
+import cloudinary
 
 env = Env()
 Env.read_env()
 
 ENVIRONMENT = env('ENVIRONMENT', default='production')
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -53,8 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
     'cloudinary',
+    'cloudinary_storage',
     'admin_honeypot',
     'django_htmx',
     'allauth',
@@ -162,18 +162,16 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True: 
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': env('CLOUD_NAME'),
-        'API_KEY': env('CLOUD_API_KEY'),
-        'API_SECRET': env('CLOUD_API_SECRET')
-    }
+    cloudinary.config(
+        cloud_name= env('CLOUD_NAME'),
+        api_key= env('CLOUD_API_KEY'),
+        api_secret= env('CLOUD_API_SECRET'))
 else:
     MEDIA_ROOT = BASE_DIR / 'media'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
