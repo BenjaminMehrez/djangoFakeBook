@@ -190,7 +190,7 @@ if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    DEFAULT_FROM_EMAIL = 'Fakebook'
+    DEFAULT_FROM_EMAIL = f'Fakebook {env('EMAIL_ADDRESS')}'
     ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
