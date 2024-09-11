@@ -1,7 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
 import uuid
+from environ import Env
+env = Env()
+Env.read_env()
+
+ENVIRONMENT = env('ENVIRONMENT', default='production')
+if ENVIRONMENT == 'production':
+    from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -37,7 +43,10 @@ class LikedPost(models.Model):
         
 class Tag(models.Model):
     name = models.CharField(max_length=20)
-    image = CloudinaryField(null=True, blank=True)
+    if ENVIRONMENT == 'production':
+        image = CloudinaryField(null=True, blank=True)
+    else:
+        image = models.FileField(upload_to='icons/', null=True, blank=True)
     slug = models.SlugField(max_length=20, unique=True)
     order = models.IntegerField(null=True)
     
