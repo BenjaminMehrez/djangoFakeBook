@@ -54,7 +54,7 @@ def profile_edit_view(request):
         if form.is_valid():
             form.save()
             
-            if request.user.emailadress_set.get(primary=True).verified:
+            if request.user.emailaddress_set.get(primary=True).verified:
                 return redirect('profile')
             else:
                 return redirect('profile-verify-email')
