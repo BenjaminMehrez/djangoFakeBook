@@ -6,9 +6,15 @@
             <h1 class="font1 leading-none text-4xl md:text-6xl title-fadein font-thin">Welcome to Photos & Captions</h1>
             <p class="text-md md:text-lg mb-5 leading-5 md:leading-none">Share your favorite Photos from Flickr and add a great caption</p>
             {% if not user.is_authenticated %}
-            <a href="/accounts/signup/?next=/profile/onboarding/" class="inline-block cursor-pointer bg-gray-800 hover:bg-black text-white font-bold text-lg rounded-full py-5 px-6 transition-all">
-                Create Account
-            </a>
+                {% if feature_herobutton  %}
+                <a href="/accounts/signup/?next=/profile/onboarding/" class="inline-block cursor-pointer bg-gray-800 hover:bg-black text-white font-bold text-lg rounded-full py-5 px-6 transition-all">
+                    Create Account
+                </a>
+                {% else %}
+                <a href="/accounts/signup/?next=/profile/onboarding/" class="inline-block cursor-pointer bg-gray-800 hover:bg-black text-white font-bold text-lg rounded-full py-5 px-6 transition-all">
+                    Get Started
+                </a>
+                {% endif %}
             {% else %}
             <div class="inline-block w-32 bg-emerald-300 p-0.5 mt-7"></div>
             {% endif %}
