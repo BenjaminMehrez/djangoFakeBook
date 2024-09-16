@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from a_posts.views import *
 from a_users.views import *
+from a_landingpages.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -44,6 +45,7 @@ urlpatterns = [
     path('comment/delete/<pk>/', comment_delete_view, name='comment-delete'),
     path('reply-sent/<pk>/', reply_sent, name='reply-sent'),
     path('reply/delete/<pk>/', reply_delete_view, name='reply-delete'),
+    path('_/', include('a_landingpages.urls')),
 ]
 
 
