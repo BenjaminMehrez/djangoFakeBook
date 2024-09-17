@@ -9,14 +9,11 @@
     <meta name="description" content="Image-sharing platform with rankings">
     <meta name="keywords" content="Flickr, photo, image sharing, captions, rankings, social platform">
     <meta name="author" content="Benjamin Mehrez">
-
     <meta property="og:url" content="http://{{ request.META.HTTP_HOST }}{{ request.path }}">
     <meta property="og:title" content="{% block og-caption %}Fakebook{% endblock %}">
     <meta property="og:description" content="{% block og-description %}Image-sharing platform with rankings{% endblock %}">
     <meta property="og:image" content="{% block og-image %}http://{{ request.META.HTTP_HOST }}{% static 'images/fakeimg.svg' %}{% endblock %}">
-    <meta name="twitter:image" content="{% block tw-image %}http://{{ request.META.HTTP_HOST }}{% static 'images/fakeimg.svg' %}{% endblock %}>
-
-
+    <meta name="twitter:image" content="{% block tw-image %}http://{{ request.META.HTTP_HOST }}{% static 'images/fakeimg.svg' %}{% endblock %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/fakeimg.svg' %}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
