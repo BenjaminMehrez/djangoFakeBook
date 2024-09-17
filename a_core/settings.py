@@ -42,7 +42,6 @@ else:
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = [ 'https://*.onrender.com']
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -67,7 +66,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.sites',
-    'django.contrib.sitemaps',
+    # 'django.contrib.sitemaps',
     'a_posts',
     'a_users',
     'a_features',
