@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_cleanup.apps.CleanupConfig',
     'django.contrib.sites',
-    # 'django.contrib.sitemaps',
+    'django.contrib.sitemaps',
     'a_posts',
     'a_users',
     'a_features',
