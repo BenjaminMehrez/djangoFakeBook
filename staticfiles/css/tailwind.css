@@ -11,7 +11,7 @@
     --primary: rgb(88, 40, 244);
     --primary-hover: rgb(69, 29, 200);
     --black: #1f2937;
-    --font1: 'Lobster', sans-serif;
+    --font1: "Noto Serif", serif;
 }
 
 h1 {
@@ -28,6 +28,7 @@ h3 {
 
 .font1 {
     font-family: var(--font1);
+    font-weight: 400;
 }
 
 .button,
@@ -134,22 +135,10 @@ body {
 p {
     margin-bottom: 1rem;
 }
-
-form p {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
 label,
 input {
     display: inline-block;
 }
-
-form p label {
-    width: 7rem;
-}
-
 label {
     margin: 6px 0 3px;
 }
@@ -299,4 +288,28 @@ input {
 
 #profile article p {
     @apply truncate leading-normal;
+}
+
+.allauth .helptext{
+    @apply block mt-4
+}
+
+.allauth .card a {
+    @apply underline underline-offset-2
+}
+
+.allauth form[action="/accounts/signup/"] ul {
+    @apply hidden
+}
+
+.allauth form[action="/accounts/signup/"] ul.errorlist {
+    @apply block
+}
+
+.allauth label[for="id_password2"] {
+    @apply hidden
+}
+
+.allauth input#id_password2 {
+    @apply mb-4
 }
