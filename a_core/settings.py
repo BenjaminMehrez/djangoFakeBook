@@ -37,7 +37,17 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['djangofakebook.up.railway.app', 'localhost', '127.0.0.1', 'djangofakebook-staging.up.railway.app']
+
+CORS_ALLOWED_ORIGINS = [
+    'https://djangofakebook.up.railway.app',
+    'https://djangofakebook-staging.up.railway.app',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://djangofakebook.up.railway.app",
+    'https://djangofakebook-staging.up.railway.app',
+]
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -190,7 +200,7 @@ if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    DEFAULT_FROM_EMAIL = f'Fakebook {env('EMAIL_ADDRESS')}'
+    DEFAULT_FROM_EMAIL = f'Fakebook {env("EMAIL_ADDRESS")}'
     ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
