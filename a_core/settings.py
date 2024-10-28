@@ -40,14 +40,22 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['djangofakebook.up.railway.app', 'localhost', '127.0.0.1', 'djangofakebook-staging.up.railway.app']
+
+CORS_ALLOWED_ORIGINS = [
+    'https://djangofakebook.up.railway.app',
+    'https://djangofakebook-staging.up.railway.app',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://djangofakebook.up.railway.app",
+    'https://djangofakebook-staging.up.railway.app',
+]
 
 
 INTERNAL_IPS = (
     '127.0.0.1',
-    'localhost:8000',
-    'https://djangofakebook.up.railway.app',
-    'djangofakebook.up.railway.app',
+    'localhost:8000'
 )
 
 # Application definition
