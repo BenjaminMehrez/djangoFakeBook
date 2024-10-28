@@ -45,7 +45,9 @@ ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = (
     '127.0.0.1',
-    'localhost:8000'
+    'localhost:8000',
+    'https://djangofakebook.up.railway.app',
+    'djangofakebook.up.railway.app',
 )
 
 # Application definition
