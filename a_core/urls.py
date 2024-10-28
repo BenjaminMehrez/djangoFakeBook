@@ -18,10 +18,24 @@ from django.contrib import admin
 from django.urls import path, include
 from a_posts.views import *
 from a_users.views import *
+from a_landingpages.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
+
+# Sitemap
+from django.contrib.sitemaps.views import sitemap
+from a_posts.sitemaps import *
+
+sitemaps = {
+    'static' : StaticSitemap,
+    'categories' : CategorySitemap,
+    'postpages' : PostpageSitemap
+}
 
 urlpatterns = [
+    path('sitemap.xml/', sitemap, { 'sitemaps' : sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt/', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('theboss/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
@@ -44,6 +58,7 @@ urlpatterns = [
     path('comment/delete/<pk>/', comment_delete_view, name='comment-delete'),
     path('reply-sent/<pk>/', reply_sent, name='reply-sent'),
     path('reply/delete/<pk>/', reply_delete_view, name='reply-delete'),
+    path('_/', include('a_landingpages.urls')),
 ]
 
 
