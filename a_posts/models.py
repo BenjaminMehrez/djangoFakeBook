@@ -9,7 +9,10 @@ if settings.ENVIRONMENT == 'production':
 # Create your models here.
 
 class Post(models.Model):
-    image = models.FileField(upload_to='post/', null=True, blank=True)
+    if settings.ENVIRONMENT == 'production':
+        image = CloudinaryField(null=True, blank=True)
+    else:
+        image = models.FileField(upload_to='post/', null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
     body = models.TextField()
     likes = models.ManyToManyField(User, related_name="likedposts", through="LikedPost")

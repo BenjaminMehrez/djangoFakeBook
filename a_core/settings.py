@@ -38,7 +38,7 @@ SECRET_KEY = env('SECRET_KEY')
 if ENVIRONMENT == 'development':
     DEBUG = True
 else:
-    DEBUG = False
+    DEBUG = True
 
 ALLOWED_HOSTS = ['djangofakebook.up.railway.app', 'localhost', '127.0.0.1', 'djangofakebook-staging.up.railway.app']
 
