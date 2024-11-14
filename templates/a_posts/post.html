@@ -1,6 +1,6 @@
 {% load static %}
 <article class="card">
-    <figure class="w-48 relative bg-gray-800 overflow-hidden">
+    <figure class="w-full relative bg-gray-800 overflow-hidden">
         <a href="{% url 'post' post.id %}">
             <img class="w-full min-h-40 hover:scale-[100%] transition duration-700" src="{{ post.image.url }}">
         </a>
