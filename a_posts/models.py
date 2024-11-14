@@ -1,21 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
-from environ import Env
-env = Env()
-Env.read_env()
+from django.conf import settings
 
-ENVIRONMENT = env('ENVIRONMENT', default='production')
-if ENVIRONMENT == 'production':
+if settings.ENVIRONMENT == 'production':
     from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
 class Post(models.Model):
-    title = models.CharField(max_length=500)
-    artist = models.CharField(max_length=500, null=True)
-    url = models.URLField(max_length=500, null=True)
-    image = models.URLField(max_length=500)
+    image = models.FileField(upload_to='post/', null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
     body = models.TextField()
     likes = models.ManyToManyField(User, related_name="likedposts", through="LikedPost")
@@ -26,7 +20,7 @@ class Post(models.Model):
     
     
     def __str__(self):
-        return str(self.title)
+        return f'{self.image} : {self.author}'
 
     class Meta:
         ordering = ['-created']
@@ -41,12 +35,12 @@ class LikedPost(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f'{self.user.username} : {self.post.title}'
+        return f'{self.user.username} : {self.post.image}'
         
         
 class Tag(models.Model):
     name = models.CharField(max_length=20)
-    if ENVIRONMENT == 'production':
+    if settings.ENVIRONMENT == 'production':
         image = CloudinaryField(null=True, blank=True)
     else:
         image = models.FileField(upload_to='icons/', null=True, blank=True)
